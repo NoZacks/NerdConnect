@@ -132,11 +132,11 @@ async function displayFirst(num, searchTerms) {
         firstItems.forEach(item => {
             outputHtml += `
                 <div class="result-item">
-                    <div class="item-name"><strong>Name:</strong> ${item.NAME}</div>
-                    <div class="item-programming"><strong>Programming:</strong> ${item.PROGRAMMING}</div>
-                    <div class="item-build"><strong>Build:</strong> ${item.BUILD}</div>
-                    <div class="item-leadership"><strong>Leadership:</strong> ${item.LEADERSHIP}</div>
-                    <div class="item-role"><strong>Role:</strong> ${item.ROLE}</div>
+                    <div class="item-name"><strong>Name: </strong> ${item.NAME}</div>
+                    <div class="item-programming"><strong>Programming: </strong> ${item.PROGRAMMING}</div>
+                    <div class="item-build"><strong>Build: </strong> ${item.BUILD}</div>
+                    <div class="item-leadership"><strong>Leadership: </strong> ${item.LEADERSHIP}</div>
+                    <div class="item-role"><strong>Role: </strong> ${item.ROLE}</div>
                 </div>
             `;
         });
@@ -151,6 +151,9 @@ async function displayFirst(num, searchTerms) {
 // Add event listener to the search button
 document.getElementById('search-button').addEventListener('click', () => {
     const searchTerms = [];
+
+    document.getElementById('output-container').style.setProperty('color','#ccc');
+    document.getElementById('output-container').innerHTML = 'Loading...';
 
     const name = document.getElementById('name').value;
     if (name) {
@@ -174,9 +177,11 @@ document.getElementById('search-button').addEventListener('click', () => {
         searchTerms.push({ key: 'LEADERSHIP', value: 'TRUE' });
     }
 
-    displayFirst(15, searchTerms);
+    displayFirst(Infinity, searchTerms);
 });
 
 // Initial display with default search terms
-const initialSearchTerms = [];
-displayFirst(15, initialSearchTerms);
+const initialSearchTerms = [
+    //{ key: 'LEADERSHIP', value: 'TRUE' }
+];
+displayFirst(Infinity, initialSearchTerms);

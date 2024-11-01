@@ -12,7 +12,7 @@ body {
 
 .result-item {
     height: 130px;
-    width:300px;
+    width:800px;
     border: 1px solid #ccc;
     border-radius: 25px;
     padding: 10px;
@@ -55,11 +55,19 @@ body {
   padding-top: 20px
 }
 
+#check.field {
+  color: #ccc;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+
 .label {
   display:flex;
   justify-content: center;
   color: #0f0;
-  margin: 20px;
+  margin: 10px;
   font-size: 20px;
   letter-spacing: 1px;
 }
@@ -72,22 +80,48 @@ body {
   height: 50px;
   width: 30%;
   border-radius: 5px;
+  font-size: 25px;
 }
 
 #search-button {
   display: flex;
+  border: solid;
+  border-width: 5px;
   height: 40px;
-  width: 30%;
+  width: 150px;
   justify-content: center;
   align-items: center;
-  color: #f00;
+  color: #212121;
   justify-self:center;
   border-radius: 5px;
+  border-color: #fff;
+  background-color: #fff;
+  font-size: 20px;
+  transition: ease 0.2s;
 }
 
-hr {
+#search-button:hover {
+  background-color: #0f0;
+  color: #fff;
+}
+
+.hr {
   margin: 20px;
-  margin-bottom: 50px;
-  background-color: #0f0
+  margin-bottom: 70px;
+  color: #0f0;
 }
 
+.check-input {
+  display: flex;
+  justify-self: center;
+  height: 30px;
+  width: 30px;
+}
+
+#first-field {
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  width: 80%;
+  /*border: solid #0f0 3px;*/
+}
