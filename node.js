@@ -131,14 +131,41 @@ async function displayFirst(num, searchTerms) {
         let outputHtml = '<div class="results">';
         firstItems.forEach(item => {
             outputHtml += `
-                <div class="result-item">
-                    <div class="item-name"><strong>Name: </strong> ${item.NAME}</div>
-                    <div class="item-programming"><strong>Programming: </strong> ${item.PROGRAMMING}</div>
-                    <div class="item-build"><strong>Build: </strong> ${item.BUILD}</div>
-                    <div class="item-leadership"><strong>Leadership: </strong> ${item.LEADERSHIP}</div>
-                    <div class="item-role"><strong>Role: </strong> ${item.ROLE}</div>
-                </div>
+                <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Card</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div id="border">
+    <div id="card">
+      <div id="row1">
+        <div id="name">${item.NAME}</div>
+        <div id="team-num">#${item.TeamNumber}</div>
+      </div>
+      <div id="row2">
+        <div id="green" class="tag"> ${item.ROLE} </div>  
+        <div id="blue" class="tag"> ${item.GRADE} </div>
+
             `;
+            if (item.BUILD == 'TRUE') {
+                outputHtml += '<div id="orange" class="tag"> Build </div>';
+            }
+            if (item.PROGRAMMING == 'TRUE') {
+                outputHtml += '<div id="pink" class="tag"> Programming </div>';
+            }
+            if (item.LEADERSHIP == 'TRUE') {
+                outputHtml += '<div id="blue" class="tag"> Leadership </div>';
+            }
+
+
+            outputHtml +=          
+`            </div>
+          </div>
+        </div>
+      </body>`;
+
         });
         outputHtml += '</div>';
         document.getElementById('output-container').innerHTML = outputHtml;

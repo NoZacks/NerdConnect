@@ -1,127 +1,216 @@
 body {
-    background-color: #212121;
+  background-color: #212121;
 }
 
 #card-set {
-    width: 100%;
-    display: flex;
-    justify-self: center;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .result-item {
-    height: 130px;
-    width:800px;
-    border: 1px solid #ccc;
-    border-radius: 25px;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #212121;
-    display: flex;
-    flex-direction: column;
-    transition: ease 0.3s;
-  }
-  
-  .result-item:hover {
-    height: 200px;
-    background-color: #313131;
-  }
+  height: 130px;
+  width:800px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #212121;
+  display: flex;
+  flex-direction: column;
+  transition: ease 0.3s;
+}
 
-  .item-name, .item-programming, .item-build, .item-leadership, .item-role, .item-resume {
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #ccc;
-    display: flex;
-    justify-content: center;
-    padding: 2px;
-  }
+.result-item:hover {
+  height: 200px;
+  background-color: #313131;
+}
 
-  .item-name strong, .item-programming strong, .item-build strong, .item-leadership strong, .item-role strong{
-    color: #ccc;
-  }
+.item-name, .item-programming, .item-build, .item-leadership, .item-role, .item-resume {
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #ccc;
+  display: flex;
+  justify-content: center;
+  padding: 2px;
+}
+
+.item-name strong, .item-programming strong, .item-build strong, .item-leadership strong, .item-role strong{
+  color: #111;
+}
 
 /* SEARCH ITEMS */
 
 
 #name.field {
-  color: #ccc;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: 20;
-  font-weight: 100;
-  padding-bottom: 60px;
-  padding-top: 20px
+color: #111;
+display: flex;
+flex-direction: column;
+justify-content: center;
+font-size: 20;
+font-weight: 100;
+padding-bottom: 60px;
+padding-top: 20px
 }
 
 #check.field {
-  color: #ccc;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+color: #111;
+display: flex;
+flex-direction: row;
+justify-content: center;
 }
 
 
 .label {
-  display:flex;
-  justify-content: center;
-  color: #0f0;
-  margin: 10px;
-  font-size: 20px;
-  letter-spacing: 1px;
+display:flex;
+justify-content: center;
+color: #0f0;
+margin: 10px;
+font-size: 20px;
+letter-spacing: 1px;
 }
 
 .text-input {
-  display: flex;
-  justify-content: center;
-  justify-self: center;
-  background-color: #f0f0f0;
-  height: 50px;
-  width: 30%;
-  border-radius: 5px;
-  font-size: 25px;
+display: flex;
+justify-content: center;
+justify-self: center;
+background-color: #f0f0f0;
+height: 50px;
+width: 30%;
+border-radius: 5px;
+font-size: 25px;
+color: #111;
 }
 
 #search-button {
-  display: flex;
-  border: solid;
-  border-width: 5px;
-  height: 40px;
-  width: 150px;
-  justify-content: center;
-  align-items: center;
-  color: #212121;
-  justify-self:center;
-  border-radius: 5px;
-  border-color: #fff;
-  background-color: #fff;
-  font-size: 20px;
-  transition: ease 0.2s;
+display: flex;
+border: solid;
+border-width: 5px;
+height: 40px;
+width: 150px;
+justify-content: center;
+align-items: center;
+color: #212121;
+justify-self:center;
+border-radius: 5px;
+border-color: #fff;
+background-color: #fff;
+font-size: 20px;
+transition: ease 0.2s;
 }
 
 #search-button:hover {
-  background-color: #0f0;
-  color: #fff;
+background-color: #0f0;
+color: #fff;
+border-color: #0f0;
 }
 
 .hr {
-  margin: 20px;
-  margin-bottom: 70px;
-  color: #0f0;
+margin: 20px;
+margin-bottom: 70px;
+color: #0f0;
 }
 
 .check-input {
-  display: flex;
-  justify-self: center;
-  height: 30px;
-  width: 30px;
+display: flex;
+justify-self: center;
+height: 30px;
+width: 30px;
 }
 
 #first-field {
-  display: flex;
-  justify-self: center;
-  align-items: center;
-  width: 80%;
-  /*border: solid #0f0 3px;*/
+display: flex;
+justify-self: center;
+align-items: center;
+width: 80%;
+/*border: solid #0f0 3px;*/
 }
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+/* General Styles */
+html {
+  background-color: #212121;
+}
+
+/* Container Styles */
+#border {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+}
+
+#card {
+  width: 900px;
+  border: solid #eee 5px;
+  border-radius: 25px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  padding-bottom: 20px; /* Add padding to the bottom */
+  transition: max-height 0.7s ease;
+  max-height: 300px; /* Initial max-height */
+  transition: ease 0.3s;
+  box-shadow: 10px 10px #111;
+}
+
+#card:hover {
+  background-color: #313131;
+}
+
+/* Row Styles */
+#row1, #row2 {
+  display: flex;
+  justify-content: left;
+  margin: 10px;
+}
+
+#row1 {
+  border-bottom: 1px solid #ccc;
+}
+
+/* Text Styles */
+#name, #team-num {
+  padding: 20px;
+  font-size: 40px;
+  font-family: "Lexend", sans-serif;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+#team-num {
+  color: #ff7438;
+}
+
+/* Tag Styles */
+.tag {
+  font-family: "Lexend";
+  display: flex;
+  align-items: center;
+  border-radius: 30px;
+  height: 40px;
+  justify-content: center;
+  transition: ease 0.3s;
+  margin: 5px;
+  padding: 0 15px;
+  border: 3px solid;
+  color: #212121;
+}
+
+#orange { border-color: #ff7438; }
+#orange { background-color: #ff7438; }
+#pink { border-color: #e346a4; }
+#pink { background-color: #e346a4; }
+#green { border-color: #61f22c; }
+#green { background-color: #61f22c; }
+#blue { border-color: #2c88f2; }
+#blue { background-color: #2c88f2; }
+
+#orange:hover, #pink:hover, #green:hover, #blue:hover {
+  margin: 0 10px;
+}
+
+
