@@ -1,44 +1,38 @@
-document.addEventListener('DOMContentLoaded', () => {
-    displayFirst(Infinity, initialSearchTerms);
+document.addEventListener('DOMContentLoaded', async () => {
+    storedData = await fetchData(initialSearchTerms);
+    console.log("Initial data fetched and stored:", storedData); // Debug: check initial stored data
+    displayFirst(Infinity, storedData);
 });
 
 const initialSearchTerms = [];
+let storedData = []; // To store the fetched data
 
-document.getElementById('search-button').addEventListener('click', () => {
+document.getElementById('search-button').addEventListener('click', async () => {
     const searchTerms = getSearchTerms();
-    console.log("Search terms:", searchTerms);
     document.getElementById('output-container').style.setProperty('color', '#ccc');
     document.getElementById('output-container').innerHTML = 'Loading...';
-    displayFirst(Infinity, searchTerms);
-});
+    storedData = await fetchData(searchTerms); // Fetch and store data
+    console.log("Data fetched and stored:", storedData); // Debug: check stored data
 
-document.getElementById('sort-canton').addEventListener('click', () => {
-    console.log("Sort by Canton clicked");
-    sortAndDisplay('CANTONDIS');
-});
-
-document.getElementById('sort-albion').addEventListener('click', () => {
-    console.log("Sort by Albion clicked");
-    sortAndDisplay('ALBIONDIS');
-});
-
-document.getElementById('sort-jackson').addEventListener('click', () => {
-    console.log("Sort by Jackson clicked");
-    sortAndDisplay('JACKSONDIS');
+    // Determine if sorting is needed and call the appropriate function
+    const zip = document.getElementById('zip').value;
+    if (zip === "48188") {
+        sortAndDisplay("CANTONDIS");
+    } else if (zip === "49224") {
+        sortAndDisplay("ALBIONDIS");
+    } else {
+        displayFirst(Infinity, storedData);
+    }
 });
 
 async function sortAndDisplay(sortBy) {
-    const searchTerms = getSearchTerms();
-    console.log("Sorting by:", sortBy, "with search terms:", searchTerms);
-    const data = await find(searchTerms);
-    console.log("Data fetched for sorting:", data);
-    if (data && data.length > 0) {
-        data.sort((a, b) => {
-            console.log(`Comparing ${a[sortBy]} and ${b[sortBy]}`);
+    console.log("sortAndDisplay called with sortBy:", sortBy, "storedData:", storedData); // Debug: check sortBy and storedData
+    if (storedData && storedData.length > 0) {
+        storedData.sort((a, b) => {
             return parseFloat(a[sortBy]) - parseFloat(b[sortBy]);
         });
-        console.log("Sorted data:", data);
-        displaySorted(data);
+        console.log("Sorted data:", storedData); // Debug: check sorted data
+        displaySorted(storedData);
     } else {
         document.getElementById('output-container').style.setProperty('color', '#ccc');
         document.getElementById('output-container').innerHTML = 'No data found.';
@@ -47,14 +41,8 @@ async function sortAndDisplay(sortBy) {
 
 function getSearchTerms() {
     const searchTerms = [];
-    const name = document.getElementById('name').value;
-    if (name) {
-        searchTerms.push({ key: 'NAME', value: name });
-    }
-    const role = document.getElementById('role').value;
-    if (role) {
-        searchTerms.push({ key: 'ROLE', value: role });
-    }
+    const zip = document.getElementById('zip').value;
+
     if (document.getElementById('programming').checked) {
         searchTerms.push({ key: 'PROGRAMMING', value: 'TRUE' });
     }
@@ -64,13 +52,43 @@ function getSearchTerms() {
     if (document.getElementById('leadership').checked) {
         searchTerms.push({ key: 'LEADERSHIP', value: 'TRUE' });
     }
-    console.log("Generated search terms:", searchTerms);
+
+    console.log("Generated search terms:", searchTerms); // Debug: check generated search terms
     return searchTerms;
 }
 
-async function displayFirst(num, searchTerms) {
-    const data = await find(searchTerms);
-    console.log("Data fetched for display:", data);
+async function fetchData(searchTerms) {
+    const url = 'https://sheet2api.com/v1/BilT5QMeRAKQ/first-interns';
+    const query = new URLSearchParams();
+    searchTerms.forEach(term => {
+        query.append(term.key, term.value);
+    });
+    const options = { query };
+    const queryUrl = url + '?' + query.toString();
+    console.log("Query URL:", queryUrl); // Debug: check query URL
+    try {
+        const response = await fetch(queryUrl, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (!response.ok) {
+            console.error('Network response was not ok:', response.statusText);
+            return [];
+        }
+        const result = await response.json();
+        console.log("Result from API:", result); // Debug: check result from API
+        return result;
+    } catch (error) {
+        console.error('Fetch error:', error);
+        return [];
+    }
+}
+
+async function displayFirst(num, data) {
+    console.log("displayFirst called with data:", data); // Debug: check data passed to displayFirst
     if (data && data.length > 0) {
         const firstItems = data.slice(0, num);
         displaySorted(firstItems);
@@ -80,40 +98,8 @@ async function displayFirst(num, searchTerms) {
     }
 }
 
-async function find(searchTerms) {
-    const url = 'https://sheet2api.com/v1/BilT5QMeRAKQ/first-interns';
-    const query = new URLSearchParams();
-    searchTerms.forEach(term => {
-        query.append(term.key, term.value);
-    });
-    const options = { query };
-    console.log("Query URL:", url + '?' + query.toString());
-    const result = await readSheetData(url, options);
-    console.log("Result from API:", result);
-    return result;
-}
-
-async function readSheetData(url, options = {}) {
-    try {
-        const query = options.query ? '?' + new URLSearchParams(options.query).toString() : '';
-        const response = await fetch(url + query, {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        const result = await response.json();
-        console.log("Raw response data:", result);
-        return result;
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
-}
-
 function displaySorted(data) {
-    console.log("Displaying sorted data:", data);
+    console.log("Displaying sorted data:", data); // Debug: check data passed to displaySorted
     let outputHtml = '<div class="results">';
     data.forEach(item => {
         outputHtml += `
@@ -137,6 +123,9 @@ function displaySorted(data) {
             outputHtml += '<div id="blue" class="tag"> Leadership </div>';
         }
         outputHtml += `
+                    </div>
+                    <div id="image-container">
+                        <iframe src="https://drive.google.com/file/d/${item.RESUME}/preview" width="640" height="480" allow="autoplay"></iframe>
                     </div>
                 </div>
             </div>

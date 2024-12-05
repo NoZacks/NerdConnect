@@ -1,47 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Interface</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8"> <!-- Specifies the character encoding for the HTML document -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ensures proper scaling on different devices -->
+    <title>Search Interface</title> <!-- Title of the webpage -->
+    <link rel="stylesheet" type="text/css" href="style.css"> <!-- Link to the CSS file -->
 </head>
 <body>
     <div id="search-terms">
-        <div class="name-field">
-            <label class="label" for="name">Name: </label>
-            <input class="text-input" type="text" id="name" name="name">
-            <label class="label" for="role">Role: </label>
-            <input class="text-input" type="text" id="role" name="role">
+        <!-- Section for search input fields -->
+        <div class="zip-field">
+            <label class="label" for="zip">Zip Code: </label> <!-- Label for the ZIP code input -->
+            <input class="text-input" type="text" id="zip" name="zip"> <!-- Input field for ZIP code -->
         </div>
         <div class="check-field">
             <div id="first-field">
-                <input class="check-input" type="checkbox" id="programming" name="programming">
+                <input class="check-input" type="checkbox" id="programming" name="programming"> <!-- Checkbox for 'Programming' -->
                 <label class="label" for="programming">Programming </label>
             </div>
             <div id="first-field">
-                <input class="check-input" type="checkbox" id="build" name="build">
+                <input class="check-input" type="checkbox" id="build" name="build"> <!-- Checkbox for 'Build' -->
                 <label class="label" for="build">Build </label>
             </div>
             <div id="first-field">
-                <input class="check-input" type="checkbox" id="leadership" name="leadership">
+                <input class="check-input" type="checkbox" id="leadership" name="leadership"> <!-- Checkbox for 'Leadership' -->
                 <label class="label" for="leadership">Leadership </label>
             </div>
         </div>
-        <button id="search-button">Search</button>
-    </div>
-
-    <div id="sort-buttons">
-        <button id="sort-canton">Sort by Canton Distance</button>
-        <button id="sort-albion">Sort by Albion Distance</button>
-        <button id="sort-jackson">Sort by Jackson Distance</button>
+        <button id="search-button">Search</button> <!-- Button to trigger the search -->
     </div>
 
     <hr>
 
     <div id="card-set">
+        <!-- Container to display the search results -->
         <div style="color:#ccc; font-size: 30px; padding: 20px;" id="output-container">Loading...</div>
     </div>
-    <script src="node.js"></script>
+    <script src="node.js"></script> <!-- Link to the JavaScript file -->
 </body>
 </html>
